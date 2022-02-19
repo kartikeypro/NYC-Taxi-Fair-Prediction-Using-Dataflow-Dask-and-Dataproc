@@ -29,6 +29,8 @@ m: multiprocessing flag
 9. Python directory construction remains very important here. Ex. Creating __init__.py file in each sub directory, declaring requirements.txt or setup.py file, calling import by absolute path. 
 
 10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. While this can be avoided by selecting other region but it invites extra cost and huge latency because my storage buckets are stored in India and using any data centre outside India for computation would inevitably invite extra burden. 
-11. 
-12. 
+
+12. Git Graph as of this point.
+<img width="1140" alt="Screenshot 2022-02-20 at 2 47 12 AM" src="https://user-images.githubusercontent.com/32822178/154819362-2a2cc6be-61eb-436b-a933-064eff93abfd.png">
+
 13. 
