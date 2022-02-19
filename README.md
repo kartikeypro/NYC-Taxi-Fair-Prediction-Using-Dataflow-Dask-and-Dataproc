@@ -17,5 +17,5 @@ export GOOGLE_APPLICATION_CREDENTIALS=path_to_secretkey_json_file
 gsutil -m cp local_file_path cloud_storage_path
 m: multiprocessing flag
 ```
-![image: test.csv and train.csv in nycdataset cloud storage bucket.](https://drive.google.com/file/d/1gjmm3XkBQpIQ6KNO9NZ98mdQP2PORIsM/view?usp=sharing)
+![image: test.csv and train.csv in nycdataset cloud storage bucket.](https://github.com/kartikeypro/NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc/blob/main/Assets/Screenshot%202022-02-19%20at%205.59.04%20PM.png)
 6. 
