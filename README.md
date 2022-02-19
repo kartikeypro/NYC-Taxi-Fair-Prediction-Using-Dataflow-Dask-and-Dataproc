@@ -1,5 +1,5 @@
 # NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc
-Project involves the transformation of data using GCP Dataflow job, data is extracted for specific duration using bigquery after partitioning and clustering, then further modelling and analysis is done using Dask running on Dataproc.
+Project involves the transformation of data using GCP Dataflow job, compressed avro data blocks are ingested into bigquery as a single table, data is extracted for specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask running on Dataproc.
 Project Steps:
 1. Dataset directory of approximately 6 GB is stored in the local system. Aim is to transfer the entire resources and computation on Google Cloud.
 2. Google cloud project with the name nyc 2022 is created and service account for the same is initialised ([Documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects)).
