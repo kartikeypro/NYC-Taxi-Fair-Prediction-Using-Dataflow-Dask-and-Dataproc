@@ -11,6 +11,7 @@ class getRecord(beam.DoFn):
         return [element]
 
 def throwEmpty(element):
+    # Remove records containing nan values.
     for i in element:
         if(len(i)==0):
             return False
@@ -47,6 +48,7 @@ class swap(beam.DoFn):
         return [element]
 
 def removeRows(element):
+    # Removes the record containing anomalies already discussed in observation notebook.
     if(element['passenger_count']<1 or element['passenger_count']>6):
         return False
     elif(element['fare_amount']<=0 or element['fare_amount']>500):
@@ -63,6 +65,7 @@ def removeRows(element):
         return True
 
 class transformDate(beam.DoFn):
+    # Date Time transformations
     def process(self, element):
         datetime = pd.to_datetime(element['pickup_datetime'],format='%Y-%m-%d %H:%M:%S UTC')
         element['month'] = datetime.month
@@ -74,6 +77,7 @@ class transformDate(beam.DoFn):
 
 
 class getDistance(beam.DoFn):
+    # Calculates the distance using coordinates.
     def process(self,element):
         p = pi/180
         a = 0.5 - cos((element['dropoff_latitude']-element['pickup_latitude'])*p)/2 

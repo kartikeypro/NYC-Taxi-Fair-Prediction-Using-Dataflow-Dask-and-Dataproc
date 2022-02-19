@@ -8,6 +8,7 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from source import transform as tf
 import fastavro
 
+# Decalaring Schema for avro file.
 schema_dict = {
     "namespace":"avrodata",
     "type":"record",
@@ -29,11 +30,13 @@ schema_dict = {
 avro_schema = fastavro.parse_schema(schema_dict)
 
 def run(argv=None):
+    #Pipeline arguements
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-file"
     ,default="gs://nycdataset/train.csv"
     ,help="the file path for input text to process")
     args, beam_args = parser.parse_known_args()
+    # Pipeline configuration
     beam_options = PipelineOptions(
       beam_args,
       runner = "DataFlowRunner",
@@ -47,7 +50,7 @@ def run(argv=None):
       region = "asia-south2",
       setup_file = "/Users/kartikeygarg/Documents/GitHub/NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc/transform_dataflow/setup.py"
       ) 
-    print(args.input_file)
+    #Pipeline transformations
     with beam.Pipeline(options=beam_options) as p:
       delimited_data = (
         p | beam.io.ReadFromText(args.input_file,skip_header_lines=1)
