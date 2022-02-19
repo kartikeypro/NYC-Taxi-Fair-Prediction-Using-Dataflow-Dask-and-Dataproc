@@ -18,4 +18,7 @@ gsutil -m cp local_file_path cloud_storage_path
 m: multiprocessing flag
 ```
 ![image: test.csv and train.csv in nycdataset cloud storage bucket.](https://github.com/kartikeypro/NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc/blob/main/Assets/Screenshot%202022-02-19%20at%205.59.04%20PM.png)
-6. 
+
+
+7. A jupyter notebook is created to observe 100000 values out of the huge nyc dataset and certain transformations and manipulations are suggested based on the observed data.
+<img width="1053" alt="Screenshot 2022-02-20 at 2 23 07 AM" src="https://user-images.githubusercontent.com/32822178/154818688-90d3197c-e31a-412b-9e53-09b34a11dfd1.png">
