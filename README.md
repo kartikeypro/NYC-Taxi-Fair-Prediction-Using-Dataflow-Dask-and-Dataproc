@@ -25,3 +25,10 @@ m: multiprocessing flag
 
 8. Based on the given transformations an ETL job was formulated using Apache Beam Python SDK. The files for the same can be found under the directory "transform-dataflow". Following was the configuration of the job:
 <img width="825" alt="Screenshot 2022-02-20 at 2 27 34 AM" src="https://user-images.githubusercontent.com/32822178/154818820-64283751-15f2-43be-94b3-9dfe18d92f3b.png">
+
+9. Python directory construction remains very important here. Ex. Creating __init__.py file in each sub directory, declaring requirements.txt or setup.py file, calling import by absolute path. 
+
+10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. While this can be avoided by selecting other region but it invites extra cost and huge latency because my storage buckets are stored in India and using any data centre outside India would inevitable add extra burden. 
+11. 
+12. 
+13. 
