@@ -23,7 +23,7 @@ m: multiprocessing flag
 7. A jupyter notebook is created to observe 100000 values out of the huge nyc dataset and certain transformations and manipulations are suggested based on the observed data.
 <img width="1053" alt="Screenshot 2022-02-20 at 2 23 07 AM" src="https://user-images.githubusercontent.com/32822178/154818688-90d3197c-e31a-412b-9e53-09b34a11dfd1.png">
 
-8. Based on the given transformations an ETL job was formulated using Apache Beam Python SDK. The files for the same can be found under the directory "transform-dataflow". Following was the configuration of the job:
+8. Based on the given transformations an ETL job was formulated using Apache Beam Python SDK. Uncompressed CSV file is read from gcs bucket, then transformation are executed and finally it is stored in compressed avro files. The files for the same can be found under the directory "transform-dataflow". Following was the configuration of the job:
 <img width="825" alt="Screenshot 2022-02-20 at 2 27 34 AM" src="https://user-images.githubusercontent.com/32822178/154818820-64283751-15f2-43be-94b3-9dfe18d92f3b.png">
 
 9. Python directory construction remains very important here. Ex. Creating __init__.py file in each sub directory, declaring requirements.txt or setup.py file, calling import by absolute path. 
