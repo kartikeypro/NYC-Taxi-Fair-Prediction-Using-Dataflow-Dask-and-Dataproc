@@ -1,0 +1,9 @@
+setup.py
+nyc_data_transformation.egg-info/PKG-INFO
+nyc_data_transformation.egg-info/SOURCES.txt
+nyc_data_transformation.egg-info/dependency_links.txt
+nyc_data_transformation.egg-info/requires.txt
+nyc_data_transformation.egg-info/top_level.txt
+source/__init__.py
+source/pipeline.py
+source/transform.py
