@@ -17,4 +17,5 @@ export GOOGLE_APPLICATION_CREDENTIALS=path_to_secretkey_json_file
 gsutil -m cp local_file_path cloud_storage_path
 m: multiprocessing flag
 ```
+![image: test.csv and train.csv in nycdataset cloud storage bucket.](https://drive.google.com/file/d/1gjmm3XkBQpIQ6KNO9NZ98mdQP2PORIsM/view?usp=sharing)
 6. 
