@@ -1,6 +1,6 @@
 import setuptools
 
-PACKAGE_NAME = 'nyd_data_transformation'
+PACKAGE_NAME = 'nyc_data_transformation'
 PACKAGE_VERSION='0.0.1'
 
 setuptools.setup (
