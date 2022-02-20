@@ -28,7 +28,7 @@ m: multiprocessing flag
 
 9. Python directory construction remains very important here. Ex. Creating __init__.py file in each sub directory, declaring requirements.txt or setup.py file, calling import by absolute path. 
 
-10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. While this can be avoided by selecting other region but it invites extra cost and huge latency because my storage buckets are stored in India and using any data centre outside India for computation would inevitably invite extra burden. 
+10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. This is because I am using a free train of dataflow services and they do not allow scaling more than 2 workers. 
 
 11. Pipeline graph and some of its key metrics: (For more information go to detail.txt in tansform-dataflow directory)
 <img width="785" alt="Screenshot 2022-02-20 at 10 48 35 AM" src="https://user-images.githubusercontent.com/32822178/154829528-3d108453-05d3-40a5-bd99-ac3d3689fd51.png">![CPU utilization (All Workers)](https://user-images.githubusercontent.com/32822178/154829558-cf6c235b-b8dd-4bb5-8daf-3fc43d6382b8.png)![Throughput (elements_sec)](https://user-images.githubusercontent.com/32822178/154829565-11eeff58-bfcd-40fa-8052-ffccc7681459.png)
