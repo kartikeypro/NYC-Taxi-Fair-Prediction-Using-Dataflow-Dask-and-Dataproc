@@ -36,4 +36,11 @@ m: multiprocessing flag
 12. Git Graph as of this point.
 <img width="1061" alt="Screenshot 2022-02-20 at 11 14 10 AM" src="https://user-images.githubusercontent.com/32822178/154830226-11c50978-47a2-4556-8748-2ed5bc039c1a.png">
 
-13. 
+13. Ouput of dataflow pipeline is stored as compressed avro files. The size of the avro files (More columns than input file) is approximately 1.1 GB as compared to the input file of 5.6 GB. **More than 80% compression level has been achieved.** 
+
+14. Now these avro files are transferred to bigquery using bq cli command tools.
+
+```
+bq --location=asia-south1 mk --dataset dataset_name   # Constructs dataset inside current project
+bq load --source_format=AVRO dataset.table_name avro_file_path # Creates table from the input avro data present
+```
