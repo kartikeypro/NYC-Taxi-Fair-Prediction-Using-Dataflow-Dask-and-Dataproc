@@ -65,3 +65,15 @@ WHERE YEAR=2011 OR YEAR=2012
 ```
 <img width="887" alt="Screenshot 2022-02-20 at 3 13 56 PM" src="https://user-images.githubusercontent.com/32822178/154836973-78fdc806-2747-4960-9eb5-fbc84875b2d1.png">
 Query result for partitioned table is dramatically better than unparttioned table.
+
+19. Now, I am going to roll out dataproc cluster and run my model on dask, rapids and GPU. 
+20. Ran some initalization functions given below on cloud interactive terminal:
+```
+SCRIPT_BUCKET=gs://goog-dataproc-initialization-actions-asia-south1
+gsutil cp ${SCRIPT_BUCKET}/gpu/install_gpu_driver.sh nycdataset/gpu/install_gpu_driver.sh
+gsutil cp ${SCRIPT_BUCKET}/dask/dask.sh nycdataset/dask/dask.sh
+gsutil cp ${SCRIPT_BUCKET}/rapids/rapids.sh nycdataset/rapids/rapids.sh
+gsutil cp ${SCRIPT_BUCKET}/python/pip-install.sh nycdataset/python/pip-install.sh
+```
+
+21. I cannot create dataproc cluster from my free account, I have to take permission from my se
