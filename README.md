@@ -76,4 +76,4 @@ gsutil cp ${SCRIPT_BUCKET}/rapids/rapids.sh nycdataset/rapids/rapids.sh
 gsutil cp ${SCRIPT_BUCKET}/python/pip-install.sh nycdataset/python/pip-install.sh
 ```
 
-21. I cannot create dataproc cluster from my free account, I have to take permission from my se
+21. **ROADBLOCK**I cannot create dataproc cluster from my free account, google free trial is a hoax! I have to probably use my company to roll them out.  
