@@ -77,5 +77,5 @@ gsutil cp ${SCRIPT_BUCKET}/python/pip-install.sh nycdataset/python/pip-install.s
 ```
 
 21. **ROADBLOCK** I cannot create dataproc cluster from my free account, google free trial is a hoax!.
-22. Sorry but I can't take you ahead of this. I can't use my company account to roll out clusters but I can surely show you other projects on similar lines in full confidentiality. If you are interest please follow and message me on twitter @itskartikey.
+22. Sorry but I can't take you ahead of this. I can't use my company account to roll out clusters but I can surely show you other projects on similar lines in full confidentiality. If you are interested please follow and message me on twitter @itskartikey.
 23. I'll try to complete this project once I receive my salary. 
