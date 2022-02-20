@@ -30,7 +30,7 @@ m: multiprocessing flag
 
 10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. While this can be avoided by selecting other region but it invites extra cost and huge latency because my storage buckets are stored in India and using any data centre outside India for computation would inevitably invite extra burden. 
 
-11. Pipeline graph and some of its key metrics: (For more information click on this [link](console.cloud.google.com/dataflow/jobs/asia-south2/2022-02-19_12_26_49-1687291251022286693;bottomTab=JOB_LOGS;expandBottomPanel=true;logsSeverity=WARNING;mainTab=EXECUTION_DETAILS;step=?pageState=(%22dfTime%22:(%22s%22:%222022-02-19T20:26:52.600Z%22,%22e%22:%222022-02-19T22:19:20.189Z%22)&project=nyc2022)
+11. Pipeline graph and some of its key metrics: (For more information go to detail.txt in tansform-dataflow directory)
 <img width="785" alt="Screenshot 2022-02-20 at 10 48 35 AM" src="https://user-images.githubusercontent.com/32822178/154829528-3d108453-05d3-40a5-bd99-ac3d3689fd51.png">![CPU utilization (All Workers)](https://user-images.githubusercontent.com/32822178/154829558-cf6c235b-b8dd-4bb5-8daf-3fc43d6382b8.png)![Throughput (elements_sec)](https://user-images.githubusercontent.com/32822178/154829565-11eeff58-bfcd-40fa-8052-ffccc7681459.png)
 
 12. Git Graph as of this point.
