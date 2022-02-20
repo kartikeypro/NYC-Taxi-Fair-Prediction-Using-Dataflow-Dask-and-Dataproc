@@ -44,3 +44,24 @@ m: multiprocessing flag
 bq --location=asia-south1 mk --dataset dataset_name   # Constructs dataset inside current project
 bq load --source_format=AVRO dataset.table_name avro_file_path # Creates table from the input avro data present
 ```
+15. Now, data has been stored in big query, I am going to compare the query cost between between unpartitioned and partitioned data. We are going to build our training model on years 2011 and 2012 and test it on some entries of 2013. So, we have to query that data out.
+16. Table partitioned on year column using following query:
+```
+CREATE TABLE nyc_dataset.partnyc
+PARTITION BY RANGE_BUCKET(year, GENERATE_ARRAY(2009, 2016 ,1)) AS
+SELECT * FROM `nyc2022.nyc_dataset.nycData`
+```
+17. Let's query out the data for 2011 and 2012 from unpartitioned table.
+```
+SELECT * FROM `nyc2022.nyc_dataset.nycData` 
+WHERE YEAR=2011 OR YEAR=2012
+```
+<img width="888" alt="Screenshot 2022-02-20 at 3 07 48 PM" src="https://user-images.githubusercontent.com/32822178/154836755-7be39bcc-418f-48dc-a31e-19f5e3e95a38.png">
+
+18. Now, let us run the same query on partitoned table.
+```
+SELECT * FROM `nyc2022.nyc_dataset.partnyc` 
+WHERE YEAR=2011 OR YEAR=2012
+```
+<img width="887" alt="Screenshot 2022-02-20 at 3 13 56 PM" src="https://user-images.githubusercontent.com/32822178/154836973-78fdc806-2747-4960-9eb5-fbc84875b2d1.png">
+Query result for partitioned table is dramatically better than unparttioned table.
