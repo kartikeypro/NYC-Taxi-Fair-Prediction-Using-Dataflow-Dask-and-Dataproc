@@ -68,6 +68,7 @@ class transformDate(beam.DoFn):
     # Date Time transformations
     def process(self, element):
         datetime = pd.to_datetime(element['pickup_datetime'],format='%Y-%m-%d %H:%M:%S UTC')
+        element['year'] = datetime.year
         element['month'] = datetime.month
         element['day'] = datetime.day
         element['weekday'] = datetime.weekday()

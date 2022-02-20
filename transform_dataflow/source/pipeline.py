@@ -20,6 +20,7 @@ schema_dict = {
         ,{"name":"dropoff_longitude","type":"float"}
         ,{"name":"dropoff_latitude","type":"float"}
         ,{"name":"passenger_count","type":"int"}
+        ,{"name":"year","type":"int"}
         ,{"name":"month","type":"int"}
         ,{"name":"day","type":"int"}
         ,{"name":"weekday","type":"int"}
@@ -47,7 +48,7 @@ def run(argv=None):
       max_num_workers = 40,
       num_workers = 20,
       machine_type = "n1-standard-1",
-      region = "asia-south2",
+      region = "asia-south1",
       setup_file = "/Users/kartikeygarg/Documents/GitHub/NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc/transform_dataflow/setup.py"
       ) 
     #Pipeline transformations
