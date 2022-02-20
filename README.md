@@ -34,6 +34,6 @@ m: multiprocessing flag
 <img width="785" alt="Screenshot 2022-02-20 at 10 48 35 AM" src="https://user-images.githubusercontent.com/32822178/154829528-3d108453-05d3-40a5-bd99-ac3d3689fd51.png">![CPU utilization (All Workers)](https://user-images.githubusercontent.com/32822178/154829558-cf6c235b-b8dd-4bb5-8daf-3fc43d6382b8.png)![Throughput (elements_sec)](https://user-images.githubusercontent.com/32822178/154829565-11eeff58-bfcd-40fa-8052-ffccc7681459.png)
 
 12. Git Graph as of this point.
-<img width="1140" alt="Screenshot 2022-02-20 at 2 47 12 AM" src="https://user-images.githubusercontent.com/32822178/154819362-2a2cc6be-61eb-436b-a933-064eff93abfd.png">
+<img width="1061" alt="Screenshot 2022-02-20 at 11 14 10 AM" src="https://user-images.githubusercontent.com/32822178/154830226-11c50978-47a2-4556-8748-2ed5bc039c1a.png">
 
 13. 
