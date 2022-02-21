@@ -12,7 +12,12 @@ gcloud init
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=path_to_secretkey_json_file
 ```
-5. The datset is stored in the google cloud storage using following command:
+6. If you still face problem interacting with gcloud due to accessibility issues you can try following commands:
+```
+gcloud auth login
+gcloud auth-application default login
+```
+8. The datset is stored in the google cloud storage using following command:
 ```
 gsutil -m cp local_file_path cloud_storage_path
 m: multiprocessing flag
