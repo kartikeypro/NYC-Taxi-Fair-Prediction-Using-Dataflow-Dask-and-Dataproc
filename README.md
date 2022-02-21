@@ -1,5 +1,5 @@
 # NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc
-Project involves the transformation of data using GCP Dataflow job, compressed avro data blocks are ingested into bigquery as a single table, data is extracted for specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask running on Dataproc.
+Today, new machine learning models are churning out like eggs from chicken. While they remain successfull at proving their performance with a small subset of dataset but when it comes to petabytes of data, which is quite common in today's context, they all fail to scale and emulate their performance. It is very important for machine learning models and data transformation practices to be scalable from starting. This is what I aim to do here. This project involves the transformation of csv data using GCP Dataflow job into compressed avro data blocks, which is then ingested into bigquery as a single table, data is extracted for a specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask, Rapids and GPUs running on Dataproc and VM Instance.
 Project Steps:
 1. Dataset directory of approximately 6 GB is stored in the local system. Aim is to transfer the entire resources and computation on Google Cloud.
 2. Google cloud project with the name nyc 2022 is created and service account for the same is initialised ([Documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects)).
@@ -12,7 +12,12 @@ gcloud init
 ```
 export GOOGLE_APPLICATION_CREDENTIALS=path_to_secretkey_json_file
 ```
-5. The datset is stored in the google cloud storage using following command:
+6. If you still face problem interacting with gcloud due to accessibility issues you can try following commands:
+```
+gcloud auth login
+gcloud auth-application default login
+```
+8. The datset is stored in the google cloud storage using following command:
 ```
 gsutil -m cp local_file_path cloud_storage_path
 m: multiprocessing flag
@@ -28,12 +33,57 @@ m: multiprocessing flag
 
 9. Python directory construction remains very important here. Ex. Creating __init__.py file in each sub directory, declaring requirements.txt or setup.py file, calling import by absolute path. 
 
-10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. While this can be avoided by selecting other region but it invites extra cost and huge latency because my storage buckets are stored in India and using any data centre outside India for computation would inevitably invite extra burden. 
+10. Sometimes all the workers are not able to scale because of low availiabilty of resources at the selected region. Like in my case, I specified to use 40 workers but only 2 workers could scale up. This is because I am using a free dataflow services and they do not allow scaling up more than 2 workers. 
 
 11. Pipeline graph and some of its key metrics: (For more information go to detail.txt in tansform-dataflow directory)
 <img width="785" alt="Screenshot 2022-02-20 at 10 48 35 AM" src="https://user-images.githubusercontent.com/32822178/154829528-3d108453-05d3-40a5-bd99-ac3d3689fd51.png">![CPU utilization (All Workers)](https://user-images.githubusercontent.com/32822178/154829558-cf6c235b-b8dd-4bb5-8daf-3fc43d6382b8.png)![Throughput (elements_sec)](https://user-images.githubusercontent.com/32822178/154829565-11eeff58-bfcd-40fa-8052-ffccc7681459.png)
+Workers (32) scaling in my other project I developed for my organisation.
+![CPU utilisation (All workers)](https://user-images.githubusercontent.com/32822178/154886697-fe9c31c5-1c47-4716-931a-3a737d490906.png)
+
 
 12. Git Graph as of this point.
-<img width="1140" alt="Screenshot 2022-02-20 at 2 47 12 AM" src="https://user-images.githubusercontent.com/32822178/154819362-2a2cc6be-61eb-436b-a933-064eff93abfd.png">
+<img width="1061" alt="Screenshot 2022-02-20 at 11 14 10 AM" src="https://user-images.githubusercontent.com/32822178/154830226-11c50978-47a2-4556-8748-2ed5bc039c1a.png">
 
-13. 
+13. Ouput of dataflow pipeline is stored as compressed avro files. The size of the avro files (More columns than input file) is approximately 1.1 GB as compared to the input file of 5.6 GB. **More than 80% compression level has been achieved.** 
+
+14. Now these avro files are transferred to bigquery using bq cli command tools.
+
+```
+bq --location=asia-south1 mk --dataset dataset_name   # Constructs dataset inside current project
+bq load --source_format=AVRO dataset.table_name avro_file_path # Creates table from the input avro data present
+```
+15. Now, data has been stored in big query, I am going to compare the query cost between between unpartitioned and partitioned data. We are going to build our training model on years 2011 and 2012 and test it on some entries of 2013. So, we have to query that data out.
+16. Table partitioned on year column using following query:
+```
+CREATE TABLE nyc_dataset.partnyc
+PARTITION BY RANGE_BUCKET(year, GENERATE_ARRAY(2009, 2016 ,1)) AS
+SELECT * FROM `nyc2022.nyc_dataset.nycData`
+```
+17. Let's query out the data for 2011 and 2012 from unpartitioned table.
+```
+SELECT * FROM `nyc2022.nyc_dataset.nycData` 
+WHERE YEAR=2011 OR YEAR=2012
+```
+<img width="888" alt="Screenshot 2022-02-20 at 3 07 48 PM" src="https://user-images.githubusercontent.com/32822178/154836755-7be39bcc-418f-48dc-a31e-19f5e3e95a38.png">
+
+18. Now, let us run the same query on partitoned table.
+```
+SELECT * FROM `nyc2022.nyc_dataset.partnyc` 
+WHERE YEAR=2011 OR YEAR=2012
+```
+<img width="887" alt="Screenshot 2022-02-20 at 3 13 56 PM" src="https://user-images.githubusercontent.com/32822178/154836973-78fdc806-2747-4960-9eb5-fbc84875b2d1.png">
+Query result for partitioned table is dramatically better than unparttioned table.
+
+19. Now, I am going to roll out dataproc cluster and run my model on dask, rapids and GPU. 
+20. Ran some initalization functions given below on cloud interactive terminal:
+```
+SCRIPT_BUCKET=gs://goog-dataproc-initialization-actions-asia-south1
+gsutil cp ${SCRIPT_BUCKET}/gpu/install_gpu_driver.sh nycdataset/gpu/install_gpu_driver.sh
+gsutil cp ${SCRIPT_BUCKET}/dask/dask.sh nycdataset/dask/dask.sh
+gsutil cp ${SCRIPT_BUCKET}/rapids/rapids.sh nycdataset/rapids/rapids.sh
+gsutil cp ${SCRIPT_BUCKET}/python/pip-install.sh nycdataset/python/pip-install.sh
+```
+
+21. **ROADBLOCK** I cannot create dataproc cluster from my free account, google free trial is a hoax!.
+22. Sorry but I can't take you ahead of this. I can't use my company account to roll out clusters but I can surely show you other projects on similar lines in full confidentiality. If you are interested please follow and message me on twitter @itskartikey.
+23. I'll try to complete this project once I receive my salary xD
