@@ -1,7 +1,7 @@
 # NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc
 Today, new machine learning models are churning out like eggs from chicken. While they remain successfull at proving their performance with a small subset of dataset but when it comes to petabytes of data, which is quite common in today's context, they all fail to scale and emulate their performance. It is very important for machine learning models and data transformation practices to be scalable from starting. This is what I aim to do here. This project involves the transformation of csv data using GCP Dataflow job into compressed avro data blocks, which is then ingested into bigquery as a single table, data is extracted for a specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask, Rapids and GPUs running on Dataproc and VM Instance. **Please watch this before starting with the description** 
 
-[![Watch the video](<img width="1440" alt="Screenshot 2022-02-21 at 10 55 41 AM" src="https://user-images.githubusercontent.com/32822178/154894561-e98bedeb-f402-4afd-82bb-f11cbd29febf.png">)]
+[(<img width="1440" alt="Screenshot 2022-02-21 at 10 55 41 AM" src="https://user-images.githubusercontent.com/32822178/154894561-e98bedeb-f402-4afd-82bb-f11cbd29febf.png">)]
 
 Project Steps:
 1. Dataset directory of approximately 6 GB is stored in the local system. Aim is to transfer the entire resources and computation on Google Cloud.
