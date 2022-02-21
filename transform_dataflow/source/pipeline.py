@@ -34,19 +34,18 @@ def run(argv=None):
     #Pipeline arguements
     parser = argparse.ArgumentParser()
     parser.add_argument("--input-file"
-    ,default="gs://nycdataset/train.csv"
+    ,default="gs://nyc2022/train.csv"
     ,help="the file path for input text to process")
     args, beam_args = parser.parse_known_args()
     # Pipeline configuration
     beam_options = PipelineOptions(
       beam_args,
       runner = "DataFlowRunner",
-      project = "nyc2022",
-      job_name = "transforming-nyc-dataset2",
-      temp_location = "gs://nycdataset/temporary",
-      staging_location = "gs://nycdataset/staging",
+      project = "tb-sandbox-338012",
+      job_name = "transforming-nyc-dataset",
+      temp_location = "gs://test-bucket-for-zip/temprory",
+      staging_location = "gs://test-bucket-for-zip/staging",
       max_num_workers = 40,
-      num_workers = 20,
       machine_type = "n1-standard-1",
       region = "asia-south1",
       setup_file = "/Users/kartikeygarg/Documents/GitHub/NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc/transform_dataflow/setup.py"
@@ -62,7 +61,7 @@ def run(argv=None):
         | beam.Filter(tf.removeRows)
         | beam.ParDo(tf.transformDate())
         | beam.ParDo(tf.getDistance())
-        | beam.io.WriteToAvro("gs://nycdataset/transformed data/data",schema=avro_schema)
+        | beam.io.WriteToAvro("gs://nyc2022/output/data",schema=avro_schema)
       )
 
 
