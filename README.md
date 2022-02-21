@@ -1,5 +1,5 @@
 # NYC-Taxi-Fair-Prediction-Using-Dataflow-Dask-and-Dataproc
-Today, new machine learning models are churning out like eggs from chicken. While they remain succesfull at proving their performance with a small subset of dataset but when it comes to petabytes of data, which is quite common in today's context, they all fail to scale and emulate their performance. It is very important for machine learning models and data transformation practices to be scalable from starting. This is what I aim to do here. This project involves the transformation of csv data using GCP Dataflow job into compressed avro data blocks, which is then ingested into bigquery as a single table, data is extracted for a specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask, Rapids and GPUs running on Dataproc and VM Instance.
+Today, new machine learning models are churning out like eggs from chicken. While they remain successfull at proving their performance with a small subset of dataset but when it comes to petabytes of data, which is quite common in today's context, they all fail to scale and emulate their performance. It is very important for machine learning models and data transformation practices to be scalable from starting. This is what I aim to do here. This project involves the transformation of csv data using GCP Dataflow job into compressed avro data blocks, which is then ingested into bigquery as a single table, data is extracted for a specific duration using bigquery after partitioning and clustering and stored in gcs, and finally modelling and analysis is done on this data using Dask, Rapids and GPUs running on Dataproc and VM Instance.
 Project Steps:
 1. Dataset directory of approximately 6 GB is stored in the local system. Aim is to transfer the entire resources and computation on Google Cloud.
 2. Google cloud project with the name nyc 2022 is created and service account for the same is initialised ([Documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects)).
@@ -32,6 +32,9 @@ m: multiprocessing flag
 
 11. Pipeline graph and some of its key metrics: (For more information go to detail.txt in tansform-dataflow directory)
 <img width="785" alt="Screenshot 2022-02-20 at 10 48 35 AM" src="https://user-images.githubusercontent.com/32822178/154829528-3d108453-05d3-40a5-bd99-ac3d3689fd51.png">![CPU utilization (All Workers)](https://user-images.githubusercontent.com/32822178/154829558-cf6c235b-b8dd-4bb5-8daf-3fc43d6382b8.png)![Throughput (elements_sec)](https://user-images.githubusercontent.com/32822178/154829565-11eeff58-bfcd-40fa-8052-ffccc7681459.png)
+Workers (32) scaling in my other project I developed for my organisation.
+![CPU utilisation (All workers)](https://user-images.githubusercontent.com/32822178/154886697-fe9c31c5-1c47-4716-931a-3a737d490906.png)
+
 
 12. Git Graph as of this point.
 <img width="1061" alt="Screenshot 2022-02-20 at 11 14 10 AM" src="https://user-images.githubusercontent.com/32822178/154830226-11c50978-47a2-4556-8748-2ed5bc039c1a.png">
@@ -78,4 +81,4 @@ gsutil cp ${SCRIPT_BUCKET}/python/pip-install.sh nycdataset/python/pip-install.s
 
 21. **ROADBLOCK** I cannot create dataproc cluster from my free account, google free trial is a hoax!.
 22. Sorry but I can't take you ahead of this. I can't use my company account to roll out clusters but I can surely show you other projects on similar lines in full confidentiality. If you are interested please follow and message me on twitter @itskartikey.
-23. I'll try to complete this project once I receive my salary. 
+23. I'll try to complete this project once I receive my salary xD
